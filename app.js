@@ -1,6 +1,14 @@
 const express = require('express');
+const exphbs = require('express-handlebars');
 
 const app = express();
+
+//handlebars middleware
+//want to use handlebars temple engine
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+
 // initializes application
 const port = 5000;
 
@@ -10,3 +18,21 @@ console.log('server started on' + port);
 });
 // listens on a certain port
 //Above the same thing
+
+//index route
+app.get('/', (req, res ) => {
+  res.render('index');
+});
+//handling a get request here
+
+
+//ABOUT route
+app.get('/about', (req, res)=> {
+  res.render('About');
+});
+
+//how middleware works
+app.use(function(req, res, next){
+  console.log(Date.now());
+  next();
+});

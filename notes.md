@@ -30,3 +30,14 @@ mongoose and node js very scalable
 
 express- web framework to build application with node js
 -creating routes , templtes, etc faster
+
+nodemon- kinda like webpack, constantly watches and updates routes
+
+express- essentially a serious a middle function calls
+
+
+handlebars - template engine
+express handlebars
+kinda the same idea as react
+
+layout bascially wraps around all the other handlebars
