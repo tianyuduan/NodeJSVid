@@ -1,0 +1,23 @@
+{
+  "name": "vidnode",
+  "version": "1.0.0",
+  "description": "app to create video ideas",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tianyuduan/NodeJSVid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tianyuduan/NodeJSVid/issues"
+  },
+  "homepage": "https://github.com/tianyuduan/NodeJSVid#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
