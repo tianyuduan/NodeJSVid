@@ -41,3 +41,5 @@ express handlebars
 kinda the same idea as react
 
 layout bascially wraps around all the other handlebars
+
+{{>}} to use partials then _navbar *
