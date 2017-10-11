@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -11,10 +12,17 @@ mongoose.connect('mongodb://localhost/youtubeidea-dev', {
     console.log('DB connected!'))
     .catch(err => console.log(err));
 
+
+//middleware to use bodyParser
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
+
 //load Idea model
 require('./models/idea');
-const Idea = mongoose.model('ideas')
-
+const Idea = mongoose.model('ideas');
 
 //Map global promises - get rid of depracation warning
 mongoose.Promise = global.Promise;
@@ -46,6 +54,18 @@ app.get('/', (req, res ) => {
 app.get('/about', (req, res)=> {
   res.render('About');
 });
+
+//add idea form
+app.get('/ideas/add', (req, res)=> {
+  res.render('ideas/add');
+});
+
+//post request idea
+app.post('/ideas', (req, res)=> {
+  console.log(req.body);
+  res.send('ok');
+});
+
 
 //how middleware works
 app.use(function(req, res, next){

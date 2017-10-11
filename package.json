@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/tianyuduan/NodeJSVid#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
