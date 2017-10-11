@@ -1,7 +1,23 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const mongoose = require("mongoose");
 
 const app = express();
+
+//Conect to mongoose
+mongoose.connect('mongodb://localhost/youtubeidea-dev', {
+  useMongoClient: true
+}).then(()=>
+    console.log('DB connected!'))
+    .catch(err => console.log(err));
+
+//load Idea model
+require('./models/idea');
+const Idea = mongoose.model('ideas')
+
+
+//Map global promises - get rid of depracation warning
+mongoose.Promise = global.Promise;
 
 //handlebars middleware
 //want to use handlebars temple engine
