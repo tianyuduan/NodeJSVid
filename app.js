@@ -11,14 +11,11 @@ mongoose.connect('mongodb://localhost/youtubeidea-dev', {
 }).then(()=>
     console.log('DB connected!'))
     .catch(err => console.log(err));
-
-
 //middleware to use bodyParser
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
-
 
 //load Idea model
 require('./models/idea');
@@ -60,16 +57,26 @@ app.get('/ideas/add', (req, res)=> {
   res.render('ideas/add');
 });
 
-//idea index pages
-app.get('./ideas', (req, res)=>{
+//EDIT IDEA form
+app.get('/ideas/edit/:id', (req, res) => {
+  Idea.findOne({
+    _id: req.params.id
+  }).then(idea => {
+    res.render('ideas/edit', {
+      idea:idea
+    });
+  });
+});
+
+//idea index page
+app.get('/ideas', (req, res)=>{
   Idea.find({})
   .sort({date: 'desc'})
   .then(ideas => {
-    res.render('ideas/index', {
+    res.render('ideas/index',{
       ideas:ideas
     });
   });
-  res.render('ideas/index');
 });
 
 //post request idea process form
@@ -99,9 +106,9 @@ app.post('/ideas', (req, res)=> {
     res.redirect('/ideas');
   });
 }
-
+  console.log(req.body);
+  res.send('ok');
 });
-
 
 //how middleware works
 app.use(function(req, res, next){

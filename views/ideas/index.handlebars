@@ -1,8 +1,9 @@
 {{#each ideas}}
-<div class="card card-body">
+<div class="well well-body mb-2">
   <h4>{{title}}</h4>
   <p>{{details}}</p>
+  <a class="btn btn-primary" href="/ideas/edit/{{id}}">Edit</a>
 </div>
 {{else}}
-<p>no video ideas listed</p>
+<p>No video ideas listed</p>
 {{/each}}
