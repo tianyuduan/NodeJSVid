@@ -60,10 +60,46 @@ app.get('/ideas/add', (req, res)=> {
   res.render('ideas/add');
 });
 
-//post request idea
+//idea index pages
+app.get('./ideas', (req, res)=>{
+  Idea.find({})
+  .sort({date: 'desc'})
+  .then(ideas => {
+    res.render('ideas/index', {
+      ideas:ideas
+    });
+  });
+  res.render('ideas/index');
+});
+
+//post request idea process form
 app.post('/ideas', (req, res)=> {
-  console.log(req.body);
-  res.send('ok');
+  let errors = [];
+
+  if(!req.body.title){
+    errors.push({text: 'Please add a title'});
+  }
+
+  if(!req.body.details){
+    errors.push({text: 'Please submit details as well'});
+  }
+  if (errors.length > 0) {
+    res.render('ideas/add', {
+    errors: errors,
+    title: req.body.title,
+    details: req.body.details,
+  });
+} else {
+  const newUser = {
+    title: req.body.title,
+    details: req.body.details,
+  };
+  new Idea(newUser).save()
+  .then(idea => {
+    res.redirect('/ideas');
+  });
+}
+
 });
 
 

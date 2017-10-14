@@ -1,4 +1,4 @@
-#node js
+n#node js
 javascript runtime uses V8 javascript engine, same uses as google chomre
 
 allows us to RUN JS as on the server
@@ -27,6 +27,7 @@ every html elment is an object
 the Model describe all the elements that are laid out
 
 mongoose and node js very scalable
+mlab relational database
 
 express- web framework to build application with node js
 -creating routes , templtes, etc faster
