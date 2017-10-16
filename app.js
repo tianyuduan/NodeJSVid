@@ -71,7 +71,18 @@ app.get('/ideas/edit/:id', (req, res) => {
 
 //edit form process
 app.put('/ideas/:id', (req, res) => {
-  res.send('PUT');
+  Idea.findOne({
+    _id: req.params.id
+  }).then(idea => {
+    idea.title = req.body.title;
+    idea.details = req.body.details;
+
+    idea.save()
+    .then(idea => {
+      res.redirect('/ideas');
+    }
+  );
+  });
 });
 
 //idea index page
@@ -82,6 +93,15 @@ app.get('/ideas', (req, res)=>{
     res.render('ideas/index',{
       ideas:ideas
     });
+  });
+});
+
+
+//idea delete
+app.delete('/ideas/:id', (req, res) => {
+  Idea.remove({_id: req.params.id})
+  .then(()=>{
+    res.redirect('/ideas');
   });
 });
 
