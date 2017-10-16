@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 
+const methodOverride = require('method-override');
 const app = express();
 
 //Conect to mongoose
@@ -16,6 +17,8 @@ mongoose.connect('mongodb://localhost/youtubeidea-dev', {
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+//middleware methodOverride
+app.use(methodOverride('_method'));
 
 //load Idea model
 require('./models/idea');
@@ -28,7 +31,6 @@ mongoose.Promise = global.Promise;
 //want to use handlebars temple engine
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
-
 
 // initializes application
 const port = 5000;
@@ -45,7 +47,6 @@ app.get('/', (req, res ) => {
   res.render('index');
 });
 //handling a get request here
-
 
 //ABOUT route
 app.get('/about', (req, res)=> {
@@ -66,6 +67,11 @@ app.get('/ideas/edit/:id', (req, res) => {
       idea:idea
     });
   });
+});
+
+//edit form process
+app.put('/ideas/:id', (req, res) => {
+  res.send('PUT');
 });
 
 //idea index page
